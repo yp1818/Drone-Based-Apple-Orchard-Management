@@ -1,0 +1,137 @@
+-- Create Database
+CREATE DATABASE apple_orchard_db;
+USE apple_orchard_db;
+
+-- =========================
+-- 1. USERS TABLE
+-- =========================
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    email VARCHAR(100),
+    full_name VARCHAR(100),
+    role VARCHAR(20) DEFAULT 'Farmer',
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- =========================
+-- 2. DISEASES TABLE
+-- =========================
+CREATE TABLE diseases (
+    disease_id INT AUTO_INCREMENT PRIMARY KEY,
+    disease_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    treatment TEXT,
+    prevention TEXT
+);
+
+-- =========================
+-- 3. ORCHARD IMAGES TABLE
+-- =========================
+CREATE TABLE orchard_images (
+    image_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    disease_id INT NULL,
+    image_filename VARCHAR(255),
+    image_path VARCHAR(255),
+    upload_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    -- Standardized health status
+    health_classification ENUM('healthy','moderate','severe'),
+
+    -- More precise confidence score
+    confidence_score DECIMAL(5,2),
+
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+
+    FOREIGN KEY (disease_id) REFERENCES diseases(disease_id)
+        ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- Indexes for performance
+CREATE INDEX idx_user ON orchard_images(user_id);
+CREATE INDEX idx_disease ON orchard_images(disease_id);
+
+-- =========================
+-- 4. CLIMATE DATA TABLE
+-- =========================
+CREATE TABLE climate_data (
+    climate_id INT AUTO_INCREMENT PRIMARY KEY,
+    state VARCHAR(100) DEFAULT 'Himachal Pradesh',
+    district VARCHAR(100),
+    year INT,
+    month INT,
+    avg_temperature FLOAT,
+    avg_humidity FLOAT,
+    total_rainfall FLOAT
+);
+
+-- =========================
+-- 5. ORCHARD HEALTH HISTORY
+-- =========================
+CREATE TABLE orchard_health_history (
+    history_id INT AUTO_INCREMENT PRIMARY KEY,
+    image_id INT NOT NULL,
+    health_status ENUM('healthy','moderate','severe') NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (image_id)
+        REFERENCES orchard_images(image_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+-- =========================
+-- 6. YIELD PREDICTIONS
+-- =========================
+CREATE TABLE yield_predictions (
+    prediction_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    health_score FLOAT,
+    predicted_yield FLOAT,
+    model_version VARCHAR(50),
+    date_of_prediction DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+-- =========================
+-- 7. ADVISORIES TABLE
+-- =========================
+CREATE TABLE advisories (
+    advisory_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    advice_type VARCHAR(100) NOT NULL,
+    advice_content TEXT NOT NULL,
+    date_of_advice DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+-- =========================
+-- 8. FEEDBACK TABLE
+-- =========================
+CREATE TABLE feedback (
+    feedback_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    feedback_type VARCHAR(50) NOT NULL,
+    feedback_content TEXT NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
