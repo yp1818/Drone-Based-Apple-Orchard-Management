@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - OrchardAI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-brand">
+                <a href="index.html" style="color: var(--primary-green); text-decoration: none;"> OrchardAI</a>
+            </div>
+            <div class="nav-auth">
+                <div class="profile-dropdown">
+                    <div class="profile-icon"></div>
+                    <div class="dropdown-menu">
+                        <a href="#">My Account</a>
+                        <a href="#" data-action="logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN LAYOUT -->
+    <div class="dashboard-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html" class="active"> Dashboard</a></li>
+                <li><a href="upload.html"> Upload Image</a></li>
+                <li><a href="dashboard.html"> Reports</a></li>
+                <li><a href="dashboard.html"> Settings</a></li>
+            </ul>
+        </aside>
+
+        <!-- CONTENT AREA -->
+        <main class="dashboard-content">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <h1 style="color: var(--primary-green); margin-bottom: var(--spacing-2);">Welcome to Your Dashboard</h1>
+                <p style="color: var(--text-gray);">Monitor your orchard health and disease detection results</p>
+            </div>
+
+            <!-- Statistics Grid -->
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">Total Images Analyzed</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-value">78%</div>
+                    <div class="stat-label">Healthy Trees</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-value">22%</div>
+                    <div class="stat-label">Infected Trees</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-value">Scab</div>
+                    <div class="stat-label">Most Detected Disease</div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <!-- Infection Trend -->
+                <div class="chart-container">
+                    <div class="chart-title"> Infection Trend (Last 7 Weeks)</div>
+                    <canvas data-chart="line"></canvas>
+                </div>
+
+                <!-- Disease Distribution -->
+                <div class="chart-container">
+                    <div class="chart-title"> Disease Distribution</div>
+                    <canvas data-chart="pie"></canvas>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="activity-section" style="margin-bottom: var(--spacing-4);">
+                <h2 style="margin-bottom: var(--spacing-3);">Recent Activity</h2>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-time">Today</div>
+                        <div class="activity-description">
+                            <strong>Apple Scab detected</strong> in field sample #23 with 92% confidence
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-time">Yesterday</div>
+                        <div class="activity-description">
+                            <strong>3 new images</strong> analyzed from northern orchard section
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-time">2 days ago</div>
+                        <div class="activity-description">
+                            <strong>Powdery Mildew</strong> detected in sample #21, treatment recommended
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-time">3 days ago</div>
+                        <div class="activity-description">
+                            <strong>Healthy status</strong> confirmed for trees in zone A
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-time">1 week ago</div>
+                        <div class="activity-description">
+                            <strong>Orchard report</strong> generated with comprehensive health assessment
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Analysis Summary -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-3); margin-bottom: var(--spacing-4);">
+                <!-- Quick Tips -->
+                <div class="card">
+                    <h3 style="color: var(--primary-green); margin-bottom: var(--spacing-2);"> Quick Tips</h3>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--spacing-1);">
+                        <li style="color: var(--text-gray); padding-left: var(--spacing-2); position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary-green);">✓</span>
+                            Upload regularly for continuous monitoring
+                        </li>
+                        <li style="color: var(--text-gray); padding-left: var(--spacing-2); position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary-green);">✓</span>
+                            Take images during optimal lighting
+                        </li>
+                        <li style="color: var(--text-gray); padding-left: var(--spacing-2); position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary-green);">✓</span>
+                            Focus on suspected disease areas
+                        </li>
+                        <li style="color: var(--text-gray); padding-left: var(--spacing-2); position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary-green);">✓</span>
+                            Download reports for record keeping
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Disease Information -->
+                <div class="card">
+                    <h3 style="color: var(--primary-green); margin-bottom: var(--spacing-2);"> Top Detected Diseases</h3>
+                    <div style="display: flex; flex-direction: column; gap: var(--spacing-2);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-weight: 600; color: var(--text-dark);">Apple Scab</p>
+                                <p style="font-size: 13px; color: var(--text-gray);">Most common (8 cases)</p>
+                            </div>
+                            <span class="status-badge status-red">45%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-weight: 600; color: var(--text-dark);">Powdery Mildew</p>
+                                <p style="font-size: 13px; color: var(--text-gray);">Moderate (5 cases)</p>
+                            </div>
+                            <span class="status-badge status-yellow">28%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-weight: 600; color: var(--text-dark);">Cedar Rust</p>
+                                <p style="font-size: 13px; color: var(--text-gray);">Minor (2 cases)</p>
+                            </div>
+                            <span class="status-badge status-yellow">12%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Overview -->
+                <div class="card">
+                    <h3 style="color: var(--primary-green); margin-bottom: var(--spacing-2);"> Orchard Health</h3>
+                    <div style="display: flex; flex-direction: column; gap: var(--spacing-2);">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="font-weight: 500; color: var(--text-dark);">Overall Health</span>
+                                <span style="color: var(--primary-green); font-weight: 600;">78%</span>
+                            </div>
+                            <div style="background-color: var(--border-gray); height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background-color: var(--accent-green); width: 78%; height: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: var(--spacing-2); margin-top: var(--spacing-2);">
+                            <div style="flex: 1; text-align: center;">
+                                <div style="color: #4caf50; font-weight: 600; font-size: 18px;">78%</div>
+                                <p style="font-size: 12px; color: var(--text-gray);">Healthy</p>
+                            </div>
+                            <div style="flex: 1; text-align: center;">
+                                <div style="color: #ff9800; font-weight: 600; font-size: 18px;">15%</div>
+                                <p style="font-size: 12px; color: var(--text-gray);">Moderate</p>
+                            </div>
+                            <div style="flex: 1; text-align: center;">
+                                <div style="color: #f44336; font-weight: 600; font-size: 18px;">7%</div>
+                                <p style="font-size: 12px; color: var(--text-gray);">Severe</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; gap: var(--spacing-2); flex-wrap: wrap; margin-bottom: var(--spacing-4);">
+                <a href="upload.html" class="btn btn-primary">
+                     Upload New Image
+                </a>
+                <button class="btn btn-secondary">
+                     Download Full Report
+                </button>
+                <button class="btn btn-outline">
+                     Refresh Data
+                </button>
+            </div>
+
+            <!-- Orchard Zones -->
+            <div style="margin-bottom: var(--spacing-6);">
+                <h2 style="margin-bottom: var(--spacing-3);"> Orchard Zones Status</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-3);">
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-2);">
+                            <h3 style="color: var(--text-dark); font-size: 16px;">Zone A (North)</h3>
+                            <span class="status-badge status-green">Healthy</span>
+                        </div>
+                        <p style="font-size: 14px; color: var(--text-gray);">All trees healthy • Last analyzed: 2 days ago</p>
+                    </div>
+
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-2);">
+                            <h3 style="color: var(--text-dark); font-size: 16px;">Zone B (East)</h3>
+                            <span class="status-badge status-yellow">Monitor</span>
+                        </div>
+                        <p style="font-size: 14px; color: var(--text-gray);">Apple Scab detected • Last analyzed: Today</p>
+                    </div>
+
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-2);">
+                            <h3 style="color: var(--text-dark); font-size: 16px;">Zone C (South)</h3>
+                            <span class="status-badge status-green">Healthy</span>
+                        </div>
+                        <p style="font-size: 14px; color: var(--text-gray);">Preventive monitoring ongoing • Last analyzed: 3 days ago</p>
+                    </div>
+
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-2);">
+                            <h3 style="color: var(--text-dark); font-size: 16px;">Zone D (West)</h3>
+                            <span class="status-badge status-green">Healthy</span>
+                        </div>
+                        <p style="font-size: 14px; color: var(--text-gray);">Standard monitoring • Last analyzed: 1 week ago</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="card" style="background: linear-gradient(135deg, #e8f5e9, #f1f8f5); border-color: var(--primary-green); margin-bottom: var(--spacing-6);">
+                <h3 style="color: var(--primary-green); margin-bottom: var(--spacing-2);"> Current Recommendations</h3>
+                <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--spacing-2);">
+                    <li style="display: flex; gap: var(--spacing-2); align-items: flex-start;">
+                        <span style="color: var(--primary-green); font-weight: 700; min-width: 24px;">1.</span>
+                        <span style="color: var(--text-dark);">Continue fungicide application in Zone B for Apple Scab control</span>
+                    </li>
+                    <li style="display: flex; gap: var(--spacing-2); align-items: flex-start;">
+                        <span style="color: var(--primary-green); font-weight: 700; min-width: 24px;">2.</span>
+                        <span style="color: var(--text-dark);">Increase sampling frequency in high-risk zones</span>
+                    </li>
+                    <li style="display: flex; gap: var(--spacing-2); align-items: flex-start;">
+                        <span style="color: var(--primary-green); font-weight: 700; min-width: 24px;">3.</span>
+                        <span style="color: var(--text-dark);">Improve air circulation by pruning dense canopies</span>
+                    </li>
+                    <li style="display: flex; gap: var(--spacing-2); align-items: flex-start;">
+                        <span style="color: var(--primary-green); font-weight: 700; min-width: 24px;">4.</span>
+                        <span style="color: var(--text-dark);">Monitor weather patterns for disease-favorable conditions</span>
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>OrchardAI</h3>
+                <p>Intelligent system for apple orchard management powered by cutting-edge AI technology.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Project Details</h3>
+                <p><strong>College Minor Project</strong></p>
+                <p style="font-size: 14px; margin-top: var(--spacing-1);">Drone-Based Intelligent System for Apple Orchard Management in Himachal Pradesh</p>
+                <p style="font-size: 13px; margin-top: var(--spacing-2); color: rgba(255, 255, 255, 0.6);">Built with HTML5, CSS3, and Vanilla JavaScript</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 OrchardAI. All rights reserved. | Designed for Agricultural Innovation | Himachal Pradesh</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+sqlalchemy
+pymysql
+ultralytics
+opencv-python
+python-multipart
+pydantic
