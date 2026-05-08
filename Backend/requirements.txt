@@ -9,3 +9,4 @@ pydantic
 cryptography
 pillow
 torch
+passlib[bcrypt]
