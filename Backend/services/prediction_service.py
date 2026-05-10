@@ -10,7 +10,7 @@ CLASS_NAMES = [
 ]
 
 def predict_disease(file_path):
-    results = model.predict(source=file_path, conf=0.25)
+    results = model.predict(source=file_path, conf=0.25, imgsz=320)
 
     output = []
     processed_path = None
